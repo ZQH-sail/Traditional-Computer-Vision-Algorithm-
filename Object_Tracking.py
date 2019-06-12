@@ -84,4 +84,4 @@ if __name__ == '__main__':
 
         # Exit if ESC pressed
         k = cv2.waitKey(1) & 0xff
-        if k == 27 : break        
+        if k == 27 : break

@@ -30,7 +30,7 @@ if __name__ == '__main__':
             tracker = cv2.TrackerCSRT_create()
 
     # Reading the Video File
-    video = cv2.VideoCapture("")
+    video = cv2.VideoCapture("car_moving.mp4")
 
     # Exit if video not opened
     if not video.isOpened():

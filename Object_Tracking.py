@@ -1,7 +1,7 @@
 import cv2
 import sys
 
-(major_ver, minor_ver, subminor_ver) = (cv2.__version__)
+(major_ver, minor_ver, subminor_ver) = (cv2.__version__).split('.')
 
 if __name__ == '__main__':
 
@@ -34,20 +34,21 @@ if __name__ == '__main__':
 
     # Exit if video not opened
     if not video.isOpened():
-        print "Could not open Video"
+        print("Could not open Video file \n")
         sys.exit()
 
     # Read the first Frame
     ok, frame = video.read()
+    print(frame)
     if not ok:
-        print "Cannot read video file"
+        print("Cannot read video file \n")
         sys.exit()
 
     # Define the initial bounding box
     bbox = (287,23,86,320)
 
     # Uncomment the line below to select a different bbox
-    bbox = cv2.selectROI(frame, bbox)
+    #bbox = cv2.selectROI(frame, bbox)
 
     while True:
         ok, frame = video.read()
@@ -66,12 +67,12 @@ if __name__ == '__main__':
         # Draw a bounding bbox
         if ok:
             # Tracking success
-            p1 = (int(bbox[0]), int bbox[1]))
+            p1 = (int(bbox[0]), int(bbox[1]))
             p2 = (int(bbox[0] + bbox[2]), int(bbox[1]+bbox[3]))
             cv2.rectangle(frame, p1, p2, (255,0,0))
 
         else:
-            cv2.putText(frame, "Tracking faliure detected")
+            cv2.putText(frame, "Tracking faliure detected", (100,80), cv2.FONT_HERSHEY_SIMPLEX, 0.75,(0,0,255),2)
 
         # Display FPS on Frame
         cv2.putText(frame, tracker_type + "Tracker", (100,20), cv2.FONT_HERSHEY_SIMPLEX, 0.75,(0, 0, 255),2)
@@ -82,6 +83,6 @@ if __name__ == '__main__':
         # Display result
         cv2.imshow("Tracking", frame)
 
-        # Exit if ESC pressed
+        #Exit if ESC pressed
         k = cv2.waitKey(1) & 0xff
         if k == 27 : break

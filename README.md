@@ -29,3 +29,14 @@ GRABCUT ALGORITHM OVERVIEW:
 5) A graph is built and Graph Cut is used to find a new classification of foreground and background pixels.
 
 6) Repeat steps 3 to 5 over and over again until classification converges 
+
+## SELECTIVE SEARCH ALGORITHMS FOR GENERATING REGION PROPOSALS
+
+The algorithm provides rectangles which can be considered as bounding box proposals. So, this can suggest some rectangles for annotations to the user. It is based on computing hierarchical grouping of similar regions on the basis of color, texture, size and shape compatibility.
+
+OVERVIEW OF ALGORTIHM:
+
+It Starts by over-segmenting the image based on intensity of the pixels using a graph-based segmentation method, (Superpixel Generations) 
+
+Then it draws bounding boxes across those over-segmentation and performs bottom up hierarchical clustering on the objects on the basis of the above mentioned compatibility criteria.
+

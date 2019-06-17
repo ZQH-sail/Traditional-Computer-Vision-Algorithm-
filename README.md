@@ -28,7 +28,7 @@ GRABCUT ALGORITHM OVERVIEW:
 
 5) A graph is built and Graph Cut is used to find a new classification of foreground and background pixels.
 
-6) Repeat steps 3 to 5 over and over again until classification converges 
+6) Repeat steps 3 to 5 over and over again until classification converges.
 
 ## SELECTIVE SEARCH ALGORITHMS FOR GENERATING REGION PROPOSALS
 

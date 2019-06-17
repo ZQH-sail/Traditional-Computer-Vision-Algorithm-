@@ -1,6 +1,6 @@
-# Some Traditional algorithms for Object Segmentation
+# TRADITIONAL COMPUTERVISION-BASED ALGORITHMS (IMPLEMENTATION)
 
-# OverSegmentation using Superpixel Algorithm.  
+# OVERSEGMENTATION USING SUPERPIXEL ALGORITHMS  
 
 Getting superpixels of the image using the scikit-image python package
 Four methods for Super-pixel Classification:  
@@ -9,7 +9,7 @@ b) Quickshift image segmentation.
 c) SLIC -K-Means based image segmentation.                   
 d) Compact watershed segmentation of gradient images.
 
-# GrabCut Algorithm 
+# GRABCUT ALGORITHM
 
 GrabCut is an iterative algorithm that combines statistics and Graph Cuts technique in order to accomplish detailed 
 2D segmentation with very limited input, originally developed at MICROSOFT RESEARCH CAMBRIDGE.

@@ -5,31 +5,33 @@ import matplotlib.pyplot as plt
 (major_ver, minor_ver, subminor_ver) = (cv2.__version__).split('.')
 
 if __name__ == '__main__':
+    #
+    # tracker_types = ['Boosting', 'MIL', 'KCF', 'TLD','MEDIANFLOW', 'GOTURN', 'MOSSE', 'CSRT']
+    # tracker_type = tracker_types[2]
+    #
+    # if int(minor_ver) < 3:
+    #     tracker = cv2.Tracker_create(tracker_type)
 
-    tracker_types = ['Boosting', 'MIL', 'KCF', 'TLD','MEDIANFLOW', 'GOTURN', 'MOSSE', 'CSRT']
-    tracker_type = tracker_types[2]
+    # else:
+    #     if tracker_type == 'Boosting':
+    #         tracker = cv2.TrackerBoosting_create()
+    #     if tracker_type == 'MIL':
+    #         tracker = cv2.TrackerMIL_create()
+    #     if tracker_type == 'KCF':
+    #         tracker = cv2.TrackerKCF_create()
+    #     if tracker_type == 'TLD':
+    #         tracker = cv2.TrackerTLD_create()
+    #     if tracker_type == 'MEDIANFLOW':
+    #         tracker = cv2.TrackerMedianFlow_create()
+    #     if tracker_type == 'GOTURN':
+    #         tracker = cv2.TrackerGOTURN_create()
+    #     if tracker_type == 'MOSSE':
+    #         tracker = cv2.TrackerMOSSE_create()
+    #     if tracker_type == 'CSRT':
+    #         tracker = cv2.TrackerCSRT_create()
 
-    if int(minor_ver) < 3:
-        tracker = cv2.Tracker_create(tracker_type)
-
-    else:
-        if tracker_type == 'Boosting':
-            tracker = cv2.TrackerBoosting_create()
-        if tracker_type == 'MIL':
-            tracker = cv2.TrackerMIL_create()
-        if tracker_type == 'KCF':
-            tracker = cv2.TrackerKCF_create()
-        if tracker_type == 'TLD':
-            tracker = cv2.TrackerTLD_create()
-        if tracker_type == 'MEDIANFLOW':
-            tracker = cv2.TrackerMedianFlow_create()
-        if tracker_type == 'GOTURN':
-            tracker = cv2.TrackerGOTURN_create()
-        if tracker_type == 'MOSSE':
-            tracker = cv2.TrackerMOSSE_create()
-        if tracker_type == 'CSRT':
-            tracker = cv2.TrackerCSRT_create()
-
+    tracker = cv2.TrackerBoosting_create()
+    tracker_type = 'Boosting'
     # Reading the Video File
     video = cv2.VideoCapture("car_moving.mp4")
 
@@ -40,7 +42,7 @@ if __name__ == '__main__':
 
     # Read the first Frame
     ok, frame = video.read()
-    print(frame)
+    # print(frame)
     if not ok:
         print("Cannot read video file \n")
         sys.exit()
@@ -49,7 +51,7 @@ if __name__ == '__main__':
     bbox = (287,23,86,320)
 
     # Uncomment the line below to select a different bbox
-    #bbox = cv2.selectROI(frame, bbox)
+    bbox = cv2.selectROI(frame,bbox)
 
     while True:
         ok, frame = video.read()
@@ -82,9 +84,9 @@ if __name__ == '__main__':
         cv2.putText(frame, "FPS : " + str(int(fps)), (100,50), cv2.FONT_HERSHEY_SIMPLEX, 0.75, (50,170,50), 2);
 
         # Display result
-        plt.imshow(frame)
-        plt.show()
+        cv2.imshow("Tracking", frame)
 
         #Exit if ESC pressed
-        #k = cv2.waitKey(1) & 0xff
-        #if k == 27 : break
+        k = cv2.waitKey(1) & 0xff
+        if k == 27 :
+            break

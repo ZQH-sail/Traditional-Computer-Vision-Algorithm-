@@ -64,14 +64,12 @@ while True:
             cv2.FONT_HERSHEY_SIMPLEX, 0.5,(0,0,255),2)
 
     # Show the output frame
-    #type(fram
     cv2.imshow('Frame', frame)
     key = cv2.waitKey(10)
-    print(key)
-    print(ord("s"))
+    #print(key)
+    #print(ord("s"))
     # if the 'b' key is selected, we are going to "select a bounding box to track"
     if key == ord("s"):
-        print("I am in" )
         # Select the bounding box of the object we want to TrackerTLD_create
         initBB = cv2.selectROI("Frame", frame, fromCenter = False, showCrosshair = True)
         tracker = cv2.TrackerCSRT_create()

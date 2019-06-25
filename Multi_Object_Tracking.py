@@ -8,7 +8,7 @@ from imutils.video import VideoStream
 trackers = cv2.MultiTracker_create()
 
 ## Reading the video file into the code
-video = cv2.VideoCapture('car_moving.mp4')
+video = cv2.VideoCapture('./data/traffic_1.mp4')
 
 # Initializing the boxes
 #boxes = None
@@ -27,7 +27,7 @@ while True:
         break
 
     # Lesser size lesser information hence resizing helps
-    frame = imutils.resize(frame, width = 700)
+    #frame = imutils.resize(frame, width = 700)
 
     #if boxes is not None:
     # Generate the updates from tracker if the boxes are present
@@ -40,13 +40,13 @@ while True:
         cv2.rectangle(frame, (x,y), (x+w, y+h),(0,255,255) ,2)
 
     cv2.imshow('Frame', frame)
-    key = cv2.waitKey(20)
+    key = cv2.waitKey(1)
 
     ## If you press key s, you will be given an option to select a bounding box.
     if key == ord("s"):
         ## Select the desried bounding boxes.
         box = cv2.selectROI("Frame", frame, fromCenter = False, showCrosshair = False)
-        #boxes.append(box)
+        # boxes.append(box)
         ## Create a new object tracker to handle this particular tracking task
         tracker = cv2.TrackerCSRT_create()
         trackers.add(tracker,frame,box)

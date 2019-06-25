@@ -48,7 +48,7 @@ while True:
         box = cv2.selectROI("Frame", frame, fromCenter = False, showCrosshair = False)
         # boxes.append(box)
         ## Create a new object tracker to handle this particular tracking task
-        tracker = cv2.TrackerCSRT_create()
+        tracker = cv2.TrackerMOSSE_create()
         trackers.add(tracker,frame,box)
 
     elif key == ord("q"):

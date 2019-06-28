@@ -8,7 +8,7 @@ from imutils.video import VideoStream
 trackers = cv2.MultiTracker_create()
 
 ## Reading the video file into the code
-video = cv2.VideoCapture('./data/traffic_1.mp4')
+video = cv2.VideoCapture('../data/traffic.mp4')
 
 # Initializing the boxes
 #boxes = None
@@ -40,7 +40,7 @@ while True:
         cv2.rectangle(frame, (x,y), (x+w, y+h),(0,255,255) ,2)
 
     cv2.imshow('Frame', frame)
-    key = cv2.waitKey(1)
+    key = cv2.waitKey(25)
 
     ## If you press key s, you will be given an option to select a bounding box.
     if key == ord("s"):
@@ -48,7 +48,7 @@ while True:
         box = cv2.selectROI("Frame", frame, fromCenter = False, showCrosshair = False)
         # boxes.append(box)
         ## Create a new object tracker to handle this particular tracking task
-        tracker = cv2.TrackerMOSSE_create()
+        tracker = cv2.TrackerCSRT_create()
         trackers.add(tracker,frame,box)
 
     elif key == ord("q"):

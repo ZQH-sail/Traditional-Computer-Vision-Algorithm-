@@ -1,0 +1,84 @@
+###############################################################################
+                           FEATURE DESCRIPTOR
+###############################################################################
+
+A feature descriptor is a representation of an image patch, which simplifies the
+image by extracting useful information from the image, throwing out the extraneous
+information.
+
+Basically it shrinks the acutal image size of width x height x 3 to some vector
+of smaller size either in 2 dimension like Convolutional features, or in 1
+dimension like HOG features.
+
+For eg, In the case of the HOG (Historgrams of gradients) descriptors. the input
+image of size 64 x 128 x 3 is converted to a feature vector of length 3780.
+Although the size of the feature vectors can be changed.
+
+The important question here is how to decide which information is useful and which
+is extraneous. The type of features aren't good for viewing the image, but are super
+useful for performing various computervision based tasks such object detection,
+object tracking etc.
+
+
+################################################################################
+#                        HOG FEATURE DESCRIPTOR                                #
+################################################################################
+
+In the HOG feature descriptor, the distribution of directions of gradients
+(oriented gradients) are used as features. Gradients( x and y derivatives ) of
+an image are useful because the magnitude of gradients is large around edges
+and corners (regions of abrupt intensity changes) and we know that edges and
+corners pack in a lot more information about object shape than flat regions.
+
+# QUESTION #
+HOW TO CALCULATE HISTOGRAM OF ORIENTED GRADIENTS ?
+
+To calculate a HOG descriptor we need to first calculate the horizontal and
+vertical gradients seperately. This is easily done by running filters like
+[-1,0,1] and [-1,0,1]'. And then computing the maginitude of the gradients and there
+directions by using simple vector addition.
+
+If there are three channels in the picture than, the magnitude of the gradient
+is taken as the maximum of the magnitudes of three channels, and the angle is
+the angle corrosponding to maximum gradient.
+
+# QUESTION #
+HOW TO CALCULATE THE HISTOGRAMS OF GRADIENTS?
+
+In this step, the image is divided into smaller patches of 8x8 cells and a
+histograms of gradients is calculated for each of these patches.
+
+BUT WHY?
+
+A) Having one histogram for each patch will make the information more compact.
+   As now the whole image can be represented by much smaller data matrix.
+B) Calculating histogram over a patch will reduce the noise. The individual
+   gradients may have some noise. But generalizing it over a larger area will
+   be a better representation.
+
+NOTE: The number 8 is a design choice. You can chose the other sizes also,
+ on the basis of the features which is required for your specific task.
+
+Now let us come to the original question back!!!
+
+So, for each 8x8 patch, we divide the whole data into 9 bins of histograms, on
+the basis of angles from 0, 20, 40 ... 160.
+
+Then for each pixel in the 8x8 matrix, we see the angle, and add the corrosponding
+magnitude to the corrosponding bin. We proportionally add the values for angles in
+between for eg: for an angle of 15 degree, we add 0.75*magnitude to bin 20 and 0.25
+*magnitude to bin 0.
+
+# 16x16 Block Normalization.
+
+Now we normalize the values considering a 16x16 block i.e it consists of 4 8x8
+blocks, and corrsoponding to each block we have 9 bin values, and hence a total
+vector size of 36x1 which we have to normalize.
+
+
+Finally concatanate these histograms into a big vector, i.e a vector of size
+(height - 16 + 1) x (width -16 +1) x 9 per image.
+
+NOTE: The hog feature correctly consists of the information related to the edges
+and corners. But since we have taken max over the color channels, it doesn't take
+that into consideration.

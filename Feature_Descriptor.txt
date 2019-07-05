@@ -1,0 +1,20 @@
+###############################################################################
+                           FEATURE DESCRIPTOR
+###############################################################################
+
+A feature descriptor is a representation of an image patch, which simplifies the
+image by extracting useful information from the image, throwing out the extraneous
+information.
+
+Basically it shrinks the acutal image size of width x height x 3 to some vector
+of smaller size either in 2 dimension like Convolutional features, or in 1
+dimension like HOG features.
+
+For eg, In the case of the HOG (Historgrams of gradients) descriptors. the input
+image of size 64 x 128 x 3 is converted to a feature vector of length 3780.
+Although the size of the feature vectors can be changed.
+
+The important question here is how to decide which information is useful and which
+is extraneous. The type of features aren't good for viewing the image, but are super
+useful for performing various computervision based tasks such object detection,
+object tracking etc.
